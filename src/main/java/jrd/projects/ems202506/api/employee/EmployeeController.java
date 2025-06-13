@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 import jrd.projects.ems202506.api.common.ApiResponse;
 import jrd.projects.ems202506.api.common.SearchPagingRequest;
+import jrd.projects.ems202506.api.employee.dto.EmployeeDto;
 import jrd.projects.ems202506.api.employee.dto.EmployeeRequestDto;
 
 @RestController
@@ -23,7 +24,7 @@ public class EmployeeController {
 
 	@PostMapping
 	ApiResponse<EmployeeDto> createEmployee(@RequestBody @Valid EmployeeRequestDto request){
-		return ApiResponse.success(employeeService.createEmployee(request));
+		return ApiResponse.success(employeeService.createEmployee(request), "Employee created successfully");
 	}
 
 	@GetMapping

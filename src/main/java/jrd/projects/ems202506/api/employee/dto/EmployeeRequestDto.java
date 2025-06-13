@@ -11,6 +11,7 @@ public class EmployeeRequestDto{
 
 	@NotBlank(message = "First name" + requiredMsg)
 	private String firstName;
+
 	@NotBlank(message = "Last name" + requiredMsg)
 	private String lastName;
 	private String middleName;

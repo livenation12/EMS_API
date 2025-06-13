@@ -3,6 +3,7 @@ package jrd.projects.ems202506.api.employee;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import jrd.projects.ems202506.api.employee.dto.EmployeeDto;
 import jrd.projects.ems202506.api.employee.dto.EmployeeRequestDto;
 
 @Mapper

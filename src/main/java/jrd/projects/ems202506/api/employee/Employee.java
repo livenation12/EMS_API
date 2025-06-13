@@ -31,6 +31,8 @@ public class Employee {
 	private String jobStatus;
 	private String email;
 	private LocalDate birthDate;
+
+	private String currentStatus;
 	@Transient
 	private int age;
 

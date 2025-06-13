@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import jrd.projects.ems202506.api.common.SearchPagingRequest;
 import jrd.projects.ems202506.api.common.SearchSpecification;
+import jrd.projects.ems202506.api.employee.dto.EmployeeDto;
 import jrd.projects.ems202506.api.employee.dto.EmployeeRequestDto;
 
 @Service

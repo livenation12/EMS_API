@@ -1,29 +1,41 @@
 package jrd.projects.ems202506.api.auth;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserPrincipal implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
-	private User user;
+	private final User user;
+	private final Set<GrantedAuthority> authorities;
 
-	public UserPrincipal(User user) {
+	public UserPrincipal(User user, Set<GrantedAuthority> authorities) {
 		this.user = user;
+		this.authorities = authorities;
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Collections.singleton(new SimpleGrantedAuthority("USER"));
+		return authorities;
 	}
 
 	@Override
 	public String getPassword() {
 		return user.getPassword();
+	}
+
+	public Set<String> getRoles() {
+		return authorities.stream()
+				.map(GrantedAuthority::getAuthority)
+				.collect(Collectors.toSet());
+	}
+
+	public User getUser() {
+		return user;
 	}
 
 	@Override
@@ -49,6 +61,6 @@ public class UserPrincipal implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
-
 	}
+
 }

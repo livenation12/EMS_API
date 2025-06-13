@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +29,8 @@ public class AuthService {
 	public AuthDto login(LoginRequest request) {
 		try {
 			Authentication auth = authManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-			UserDetails userDetails  = (UserDetails) auth.getPrincipal();
-			return AuthMapper.INSTANCE.toDto(userDetails);
+			UserPrincipal principal = (UserPrincipal) auth.getPrincipal();
+			return AuthMapper.INSTANCE.toDto(principal);
 		} catch (Exception e) {
 			throw new RuntimeException("Invalid email or password");
 		}
@@ -49,6 +49,16 @@ public class AuthService {
 		} catch (Exception e) {
 			throw new ApiException("Registration failed", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
 
+	public AuthDto verifyToken() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth == null || !auth.isAuthenticated()) {
+			SecurityContextHolder.clearContext();
+			throw new ApiException("Unauthorized", HttpStatus.UNAUTHORIZED);
+		}
+		UserPrincipal principal = (UserPrincipal) auth.getPrincipal();
+		System.out.println(principal.getRoles());
+		return AuthMapper.INSTANCE.toDto(principal);
 	}
 }

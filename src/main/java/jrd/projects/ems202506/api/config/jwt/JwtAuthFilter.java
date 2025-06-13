@@ -27,24 +27,29 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 	@Autowired
 	private UserDetailsService userDetailsService;
 
+	@Autowired
+	private JwtProperties jwtProps;
+
 	@Override
 	protected void doFilterInternal(HttpServletRequest request,
 			HttpServletResponse response,
 			FilterChain filterChain) throws ServletException, IOException {
 
 		String token = null;
+		//check if theres a cookies, then extract our jwt cookie token form the request
 		if (request.getCookies() != null) {
 			for (Cookie cookie : request.getCookies()) {
-				if ("AUTH-TOKEN".equals(cookie.getName())) {
+				if (jwtProps.getAuthCookieName().equals(cookie.getName())) {
 					token = cookie.getValue();
 					break;
 				}
 			}
 		}
-
+		// check it token is not null and if its valid
 		if (token != null && jwtService.isTokenValid(token)) {
+			//extract username(=email) from token
 			String username = jwtService.extractUsername(token);
-
+			//load details by the username from the extracted token
 			UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
 			UsernamePasswordAuthenticationToken authToken =

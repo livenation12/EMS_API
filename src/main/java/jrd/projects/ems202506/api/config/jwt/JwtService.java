@@ -12,12 +12,21 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.Cookie;
 
 @Service
 public class JwtService {
 	@Autowired
 	private JwtProperties jwtProps;
 	private final long EXPIRATION_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+	public Cookie destroyJwtCookie() {
+		Cookie cookie = new Cookie(jwtProps.getAuthCookieName(), null);
+		cookie.setPath("/");
+		cookie.setHttpOnly(true);
+		cookie.setMaxAge(0);
+		return cookie;
+	}
 
 	public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
 		final Claims claims = getClaims(token);
@@ -56,5 +65,14 @@ public class JwtService {
 		} catch (JwtException | IllegalArgumentException e) {
 			return false;
 		}
+	}
+
+	public Cookie setJwtCookie(String cookieValue) {
+		Cookie cookie = new Cookie(jwtProps.getAuthCookieName(), cookieValue);
+		cookie.setHttpOnly(true);
+		cookie.setSecure(false);
+		cookie.setPath("/");
+		cookie.setMaxAge((int) EXPIRATION_MS);
+		return cookie;
 	}
 }
