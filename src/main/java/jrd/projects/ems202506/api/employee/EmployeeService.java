@@ -31,8 +31,10 @@ public class EmployeeService {
 				Sort.by(request.getSortBy()).descending()
 				);
 		Page<Employee> page = employeeRepo.findAll(
-				SearchSpecification.searchByField(request.getSearchBy(), request.getKeyword()),
-				pageable
+				SearchSpecification.searchByField(
+						request.getSearchBy()
+						, request.getKeyword())
+				, pageable
 				);
 		return page.map(EmployeeMapper.INSTANCE::toDto); // preserve pagination
 	}

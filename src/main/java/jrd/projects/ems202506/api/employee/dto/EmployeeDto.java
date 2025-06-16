@@ -2,6 +2,7 @@ package jrd.projects.ems202506.api.employee.dto;
 
 import java.time.LocalDate;
 
+import jrd.projects.ems202506.api.employee_status_type.EmployeeStatusType;
 import lombok.Data;
 
 @Data
@@ -16,10 +17,9 @@ public class EmployeeDto {
 	private String email;
 	private LocalDate birthDate;
 	private int age;
-	private String currentStatus;
+	private EmployeeStatusType status;
 
 	public String getFullName() {
-		return firstName + " " + middleName.charAt(0) + ". " +  lastName;
+		return firstName + " " + lastName;
 	}
-
 }

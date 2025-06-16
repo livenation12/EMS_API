@@ -13,5 +13,5 @@ public class EmployeeStatusRequestDto {
 
 	private String task;
 
-	private String status;
+	private Long statusId;
 }

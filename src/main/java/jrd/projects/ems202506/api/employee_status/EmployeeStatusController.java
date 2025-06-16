@@ -1,7 +1,10 @@
 package jrd.projects.ems202506.api.employee_status;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import jrd.projects.ems202506.api.common.ApiResponse;
+import jrd.projects.ems202506.api.employee_status.dto.EmployeeStatusDto;
 import jrd.projects.ems202506.api.employee_status.dto.EmployeeStatusRequestDto;
 
 @RestController
@@ -22,9 +26,14 @@ public class EmployeeStatusController {
 	@PatchMapping
 	@PreAuthorize("hasRole('ADMIN')")
 	public ApiResponse<?> employeeStatusUpdate(@RequestBody @Valid EmployeeStatusRequestDto request){
-		System.out.println("im admin");
 		employeeStatusService.updateStatus(request);
 		return ApiResponse.success("Employee status updated");
+	}
+
+	@GetMapping("/latest-status")
+	public ApiResponse<List<EmployeeStatusDto>> getLatestStatuses(){
+		List<EmployeeStatusDto> latestStatus = employeeStatusService.readLatestStatus();
+		return ApiResponse.success(latestStatus);
 	}
 
 

@@ -5,11 +5,14 @@ import java.time.Period;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
+import jrd.projects.ems202506.api.employee_status_type.EmployeeStatusType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,7 +35,9 @@ public class Employee {
 	private String email;
 	private LocalDate birthDate;
 
-	private String currentStatus;
+	@ManyToOne(fetch = FetchType.EAGER)
+	private EmployeeStatusType status;
+
 	@Transient
 	private int age;
 
@@ -42,4 +47,12 @@ public class Employee {
 		}
 		return Period.between(birthDate, LocalDate.now()).getYears();
 	}
+
+	public String getFullName() {
+		if (middleName != null && !middleName.isEmpty()) {
+			return firstName + " " + middleName.charAt(0) + ". " + lastName;
+		}
+		return firstName + " " + lastName;
+	}
+
 }
