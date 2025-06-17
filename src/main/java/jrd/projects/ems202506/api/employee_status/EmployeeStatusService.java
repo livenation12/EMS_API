@@ -65,7 +65,7 @@ public class EmployeeStatusService {
 			statusDto.setEmployeeId(employee.getId());
 			statusDto.setStatus(statusType);
 			statusDto.setTask(newStatus.getTask());
-			payloads.add(statusDto);
+			statusDto.setTimestamp(newStatus.getTimestamp());			payloads.add(statusDto);
 
 		}
 		employeeRepo.saveAll(employees);
