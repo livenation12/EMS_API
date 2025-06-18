@@ -1,8 +1,8 @@
 package jrd.projects.ems202506.api.task.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
-import jrd.projects.ems202506.api.employee.Employee;
+import jrd.projects.ems202506.api.task_status.TaskStatus;
 import lombok.Data;
 
 @Data
@@ -12,13 +12,9 @@ public class TaskRequestDto {
 	private String title;
 	private String description;
 
-	private String status; // e.g. ASSIGNED, IN_PROGRESS, DONE
+	private TaskStatus status; // e.g. ASSIGNED, IN_PROGRESS, DONE
 
-	private Employee assignedTo;
+	private Long assignedToId;
 
-	private Employee assignedBy;
-
-	private LocalDateTime createdAt;
-	private LocalDateTime updatedAt;
-	private LocalDateTime dueDate;
+	private LocalDate dueDate;
 }

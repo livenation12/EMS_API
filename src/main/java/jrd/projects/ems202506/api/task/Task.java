@@ -1,12 +1,15 @@
 package jrd.projects.ems202506.api.task;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jrd.projects.ems202506.api.employee.Employee;
+import jrd.projects.ems202506.api.task_status.TaskStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,13 +18,16 @@ import lombok.Setter;
 @Entity
 public class Task {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String title;
 	private String description;
 
-	private String status; // e.g. ASSIGNED, IN_PROGRESS, DONE
+	private Integer position;
+
+	@ManyToOne
+	private TaskStatus status; // e.g. ASSIGNED, IN_PROGRESS, DONE
 
 	@ManyToOne
 	private Employee assignedTo;
@@ -31,5 +37,5 @@ public class Task {
 
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
-	private LocalDateTime dueDate;
+	private LocalDate dueDate;
 }

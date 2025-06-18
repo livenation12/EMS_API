@@ -61,4 +61,5 @@ public class AuthService {
 		System.out.println(principal.getRoles());
 		return AuthMapper.INSTANCE.toDto(principal);
 	}
+
 }
