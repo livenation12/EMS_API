@@ -7,11 +7,13 @@ import lombok.Data;
 @Data
 public class KanbanColumnDto {
 
+	private Long id;
+
 	private String label;
 
 	private List<TaskDto> tasks;
 
-	private Integer position;
+	private Float position;
 
 	private String colorCode;
 

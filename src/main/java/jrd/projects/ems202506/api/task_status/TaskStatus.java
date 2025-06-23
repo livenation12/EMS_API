@@ -15,7 +15,7 @@ public class TaskStatus {
 	private Long id;
 
 	private String label; // e.g. "To Do", "In Progress", "Done"
-	private Integer position; // For ordering columns
+	private Float position; // For ordering columns
 	private String colorCode; // Optional for frontend use
 	private Boolean isDefault;
 }

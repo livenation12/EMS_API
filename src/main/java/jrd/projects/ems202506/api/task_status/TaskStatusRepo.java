@@ -3,6 +3,7 @@ package jrd.projects.ems202506.api.task_status;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +15,9 @@ public interface TaskStatusRepo extends JpaRepository<TaskStatus, Long> {
 	Optional<TaskStatus> findByIsDefault(Boolean isDefault);
 
 	@Query("SELECT MAX(position) FROM TaskStatus")
-	Integer findMaxPosition();
+	Float findMaxPosition();
 
+	@Modifying
+	@Query("UPDATE TaskStatus t SET t.isDefault = false")
+	Integer setNewDefault();
 }

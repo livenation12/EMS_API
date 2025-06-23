@@ -3,6 +3,9 @@ package jrd.projects.ems202506.api.task;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,7 +27,7 @@ public class Task {
 	private String title;
 	private String description;
 
-	private Integer position;
+	private Float position;
 
 	@ManyToOne
 	private TaskStatus status; // e.g. ASSIGNED, IN_PROGRESS, DONE
@@ -35,7 +38,10 @@ public class Task {
 	@ManyToOne
 	private Employee assignedBy;
 
+	@CreationTimestamp
 	private LocalDateTime createdAt;
+
+	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 	private LocalDate dueDate;
 }
