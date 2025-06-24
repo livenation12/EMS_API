@@ -18,8 +18,5 @@ public class EmployeeDto {
 	private LocalDate birthDate;
 	private int age;
 	private EmployeeStatusType status;
-
-	public String getFullName() {
-		return firstName + " " + lastName;
-	}
+	private String fullName;
 }

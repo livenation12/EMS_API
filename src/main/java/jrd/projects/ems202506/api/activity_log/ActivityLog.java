@@ -1,4 +1,4 @@
-package jrd.projects.ems202506.api.log.activity_log;
+package jrd.projects.ems202506.api.activity_log;
 
 import java.time.LocalDateTime;
 

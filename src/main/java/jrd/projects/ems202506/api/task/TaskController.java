@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import jrd.projects.ems202506.api.common.ApiResponse;
-import jrd.projects.ems202506.api.task.dto.KanbanColumnDto;
 import jrd.projects.ems202506.api.task.dto.TaskDto;
 import jrd.projects.ems202506.api.task.dto.TaskRequestDto;
+import jrd.projects.ems202506.api.task_status.dto.KanbanColumnDto;
 
 @RestController
 @RequestMapping("/api/tasks")
