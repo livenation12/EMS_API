@@ -2,7 +2,6 @@ package jrd.projects.ems202506.api.task;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,14 +14,14 @@ import jrd.projects.ems202506.api.common.ApiResponse;
 import jrd.projects.ems202506.api.task.dto.TaskDto;
 import jrd.projects.ems202506.api.task.dto.TaskRequestDto;
 import jrd.projects.ems202506.api.task_status.dto.KanbanColumnDto;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/tasks")
+@RequiredArgsConstructor
 public class TaskController {
 
-	@Autowired
-	private TaskService taskService;
-
+	private final TaskService taskService;
 
 	@PostMapping
 	public ApiResponse<TaskDto> createTask(@RequestBody @Valid TaskRequestDto request) {

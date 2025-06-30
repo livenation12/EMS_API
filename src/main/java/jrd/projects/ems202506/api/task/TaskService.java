@@ -49,13 +49,13 @@ public class TaskService {
 		Float maxPosition = taskRepo.findMaxPosition(defaultStatus.getId(), employeeToAssign.getId());
 		Float nextPosition = (maxPosition != null ? maxPosition : 0f) + 1;
 		task.setPosition(nextPosition);
+		taskLogService.createLog(task, ActionType.CREATED);
 		return TaskMapper.INSTANCE.toDto(taskRepo.save(task));
 	}
 
 	@Transactional
 	public List<KanbanColumnDto> readUserKanbanList() {
 		Employee userEmployee = Utils.getAuthUser().getEmployee();
-
 		if (userEmployee == null) {
 			throw new ApiException("User doesn't have employee details", HttpStatus.FORBIDDEN);
 		}

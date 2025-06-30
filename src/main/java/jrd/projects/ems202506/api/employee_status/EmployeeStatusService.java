@@ -37,7 +37,6 @@ public class EmployeeStatusService {
 
 	public List<EmployeeStatusDto> readLatestStatus(){
 		List<EmployeeStatus> latestStatus = statusRepo.findTopWithEmployee(PageRequest.of(0, 20));
-		System.out.println(latestStatus.getFirst().getEmployee().getFullName());
 		return latestStatus.stream().map(EmployeeStatusDto::new).collect(Collectors.toList());
 	}
 

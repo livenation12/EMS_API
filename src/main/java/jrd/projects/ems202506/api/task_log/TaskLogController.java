@@ -1,8 +1,9 @@
 package jrd.projects.ems202506.api.task_log;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jrd.projects.ems202506.api.common.ApiResponse;
@@ -10,13 +11,14 @@ import jrd.projects.ems202506.api.task_log.dto.TaskLogDto;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/tasks/logs")
+@RequestMapping("/api/tasks/logs")
 @RequiredArgsConstructor
 public class TaskLogController {
 
 	private final TaskLogService taskLogService;
 
-	public ApiResponse<List<TaskLogDto>> readAllTaskLogList(){
-		return ApiResponse.success(taskLogService.readAll());
+	@GetMapping("/latest")
+	public ApiResponse<Page<TaskLogDto>> readLatestTaskLogListByUser(@RequestParam(defaultValue = "0") Integer pageNumber){
+		return ApiResponse.success(taskLogService.readLatestByUser(pageNumber));
 	}
 }

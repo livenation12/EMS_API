@@ -30,11 +30,9 @@ public class EmployeeStatusController {
 		return ApiResponse.success("Employee status updated");
 	}
 
-	@GetMapping("/latest-status")
+	@GetMapping("/latest")
 	public ApiResponse<List<EmployeeStatusDto>> getLatestStatuses(){
 		List<EmployeeStatusDto> latestStatus = employeeStatusService.readLatestStatus();
 		return ApiResponse.success(latestStatus);
 	}
-
-
 }
