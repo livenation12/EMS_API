@@ -12,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jrd.projects.ems202506.api.auth.User;
 import jrd.projects.ems202506.api.enums.ActionType;
 import jrd.projects.ems202506.api.task.Task;
@@ -19,6 +20,7 @@ import lombok.Data;
 
 @Data
 @Entity
+@Table(name="task_logs")
 public class TaskLog {
 
 	@Id

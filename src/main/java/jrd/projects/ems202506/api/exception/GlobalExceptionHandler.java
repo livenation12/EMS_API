@@ -1,5 +1,6 @@
 package jrd.projects.ems202506.api.exception;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,13 @@ public class GlobalExceptionHandler {
 				.status(ex.getStatus())
 				.body(ApiResponse.error(ex.getMessage()));
 	}
+	@ExceptionHandler(FieldValidationException.class)
+	public ApiResponse<Map<String, String>> handleFieldValidationException(FieldValidationException ex) {
+		Map<String, String> errors = new HashMap<>();
+		errors.put(ex.getField(), ex.getMessage());
+		return ApiResponse.error(errors);
+	}
+
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(Exception.class)
 	ApiResponse<String> handleServerException(Exception ex){
@@ -46,4 +54,5 @@ public class GlobalExceptionHandler {
 				.collect(Collectors.toMap(error -> error.getField(), error -> error.getDefaultMessage()));
 		return ApiResponse.error(response);
 	}
+
 }

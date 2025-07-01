@@ -8,12 +8,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jrd.projects.ems202506.api.employee.Employee;
 import jrd.projects.ems202506.api.employee_status_type.EmployeeStatusType;
 import lombok.Data;
 
 @Data
 @Entity
+@Table(name="employee_statuses")
 public class EmployeeStatus {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

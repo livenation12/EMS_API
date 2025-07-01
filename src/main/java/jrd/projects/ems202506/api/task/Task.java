@@ -11,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jrd.projects.ems202506.api.employee.Employee;
 import jrd.projects.ems202506.api.task_status.TaskStatus;
 import lombok.Getter;
@@ -19,6 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@Table(name="tasks")
 public class Task {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
