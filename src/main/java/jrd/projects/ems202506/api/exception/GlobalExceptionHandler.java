@@ -22,11 +22,13 @@ public class GlobalExceptionHandler {
 				.status(ex.getStatus())
 				.body(ApiResponse.error(ex.getMessage()));
 	}
+
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(FieldValidationException.class)
 	public ApiResponse<Map<String, String>> handleFieldValidationException(FieldValidationException ex) {
 		Map<String, String> errors = new HashMap<>();
 		errors.put(ex.getField(), ex.getMessage());
-		return ApiResponse.error(errors);
+		return  ApiResponse.error(errors);
 	}
 
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

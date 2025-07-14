@@ -11,5 +11,4 @@ import jrd.projects.ems202506.api.schedule.dto.ScheduleRequestDto;
 public interface ScheduleMapper extends BaseMapper<ScheduleRequestDto, ScheduleDto, Schedule> {
 
 	ScheduleMapper INSTANCE = Mappers.getMapper(ScheduleMapper.class);
-
 }
