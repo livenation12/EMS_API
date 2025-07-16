@@ -1,6 +1,7 @@
 package jrd.projects.ems202506.api.schedule.dto;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -19,4 +20,6 @@ public class ScheduleRequestDto {
 
 	@NotNull(message = "End date is required")
 	private LocalDateTime endDate;
+
+	private Set<Long> participantIds;
 }

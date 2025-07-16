@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,5 +35,11 @@ public class ScheduleController {
 	public ApiResponse<List<ScheduleDto>> readSchedulesByRange(@ModelAttribute DateRangeFilter range){
 		List<ScheduleDto> scheduleList = scheduleService.readByRange(range);
 		return ApiResponse.success(scheduleList);
+	}
+
+	@PutMapping("/{id}")
+	public ApiResponse<ScheduleDto> updateById(@RequestBody @Valid ScheduleRequestDto request, @PathVariable Long id){
+		ScheduleDto sched = scheduleService.updateById(id, request);
+		return ApiResponse.success(sched, "Schedule successfully updated");
 	}
 }

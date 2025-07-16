@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EmployeeStatusRepo extends JpaRepository<EmployeeStatus, Long> {
 
+	List<EmployeeStatus> findAllByEmployeeId(Long employeeId, PageRequest pageRequest);
+
 	@Query("SELECT es FROM EmployeeStatus es JOIN FETCH es.employee ORDER BY es.timestamp DESC")
 	List<EmployeeStatus> findTopWithEmployee(PageRequest pageRequest);
 }

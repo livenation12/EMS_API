@@ -2,6 +2,7 @@ package jrd.projects.ems202506.api.employee;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,10 +10,12 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jrd.projects.ems202506.api.employee_status_type.EmployeeStatusType;
+import jrd.projects.ems202506.api.schedule.Schedule;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -38,6 +41,9 @@ public class Employee {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private EmployeeStatusType status;
 
+	@ManyToMany(mappedBy = "participants")
+	private Set<Schedule> schedules;
+
 	@Transient
 	private int age;
 
@@ -54,5 +60,7 @@ public class Employee {
 		}
 		return firstName + " " + lastName;
 	}
+
+
 
 }

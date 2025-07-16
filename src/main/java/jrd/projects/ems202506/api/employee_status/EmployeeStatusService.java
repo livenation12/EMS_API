@@ -35,6 +35,12 @@ public class EmployeeStatusService {
 	@Autowired
 	private EmployeeStatusTypeRepo statusTypeRepo;
 
+	public List<EmployeeStatusDto> readEmployeeStatusByEmployeeId(Long employeeId){
+		PageRequest pageRequest = PageRequest.of(0, 20);
+		List<EmployeeStatus> employeeStatusList = statusRepo.findAllByEmployeeId(employeeId, pageRequest);
+		return EmployeeStatusMapper.INSTANCE.toDtoList(employeeStatusList);
+	}
+
 	public List<EmployeeStatusDto> readLatestStatus(){
 		List<EmployeeStatus> latestStatus = statusRepo.findTopWithEmployee(PageRequest.of(0, 20));
 		return latestStatus.stream().map(EmployeeStatusDto::new).collect(Collectors.toList());
@@ -64,7 +70,8 @@ public class EmployeeStatusService {
 			statusDto.setEmployeeId(employee.getId());
 			statusDto.setStatus(statusType);
 			statusDto.setTask(newStatus.getTask());
-			statusDto.setTimestamp(newStatus.getTimestamp());			payloads.add(statusDto);
+			statusDto.setTimestamp(newStatus.getTimestamp());
+			payloads.add(statusDto);
 
 		}
 		employeeRepo.saveAll(employees);

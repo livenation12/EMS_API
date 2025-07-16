@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface ScheduleRepo extends JpaRepository<Schedule, Long> {
 
 	List<Schedule> findByStartDateBetween(LocalDateTime startDate, LocalDateTime endDate);
+
 }

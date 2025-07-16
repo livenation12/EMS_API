@@ -38,7 +38,7 @@ public class SecurityConfig {
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
 		configuration.setAllowedOrigins(List.of("http://localhost:5173"));// add others client origins here
-		configuration.setAllowedMethods(List.of("GET", "POST", "PATCH", "DELETE", "OPTIONS"));
+		configuration.setAllowedMethods(List.of("GET", "POST", "PATCH", "DELETE", "OPTIONS", "PUT"));
 		configuration.setAllowedHeaders(List.of("*")); // allow all headers
 		configuration.setAllowCredentials(true); // important for cookies/token headers
 		configuration.setExposedHeaders(List.of("Set-Cookie")); // expose cookies if needed
