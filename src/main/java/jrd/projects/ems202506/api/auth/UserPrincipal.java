@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jrd.projects.ems202506.api.permission.Permission;
+import jrd.projects.ems202506.api.user.User;
+
 public class UserPrincipal implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
@@ -28,10 +31,14 @@ public class UserPrincipal implements UserDetails {
 		return user.getPassword();
 	}
 
-	public Set<String> getRoles() {
-		return authorities.stream()
-				.map(GrantedAuthority::getAuthority)
+	public Set<Permission> getPermissions() {
+		return user.getRoles().stream()
+				.flatMap(role -> role.getPermissions().stream())
 				.collect(Collectors.toSet());
+	}
+
+	public Set<String> getRoles() {
+		return user.getRoles().stream().map(role -> "ROLE_" + role.getName()).collect(Collectors.toSet());
 	}
 
 	public User getUser() {

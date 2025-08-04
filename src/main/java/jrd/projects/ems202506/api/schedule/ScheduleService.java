@@ -16,6 +16,8 @@ import jrd.projects.ems202506.api.exception.FieldValidationException;
 import jrd.projects.ems202506.api.schedule.dto.DateRangeFilter;
 import jrd.projects.ems202506.api.schedule.dto.ScheduleDto;
 import jrd.projects.ems202506.api.schedule.dto.ScheduleRequestDto;
+import jrd.projects.ems202506.api.schedule_type.ScheduleType;
+import jrd.projects.ems202506.api.schedule_type.ScheduleTypeRepo;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -24,14 +26,18 @@ public class ScheduleService {
 
 	private final ScheduleRepo scheduleRepo;
 
+	private final ScheduleTypeRepo schedTypeRepo;
+
 	private final EmployeeRepo employeeRepo;
+
 
 	public ScheduleDto create(ScheduleRequestDto request) {
 
 		//Date validation
 		validateDateRange(request.getStartDate(), request.getEndDate());
-
+		ScheduleType schedType = schedTypeRepo.findById(request.getTypeId()).orElseThrow(() -> new ApiException("Type not found", HttpStatus.BAD_REQUEST));
 		Schedule schedule = ScheduleMapper.INSTANCE.toEntity(request);
+		schedule.setType(schedType);
 		schedule.setParticipants(findParticipantsFromRequest(request));
 		schedule.setCreatedBy(Utils.getAuthUser());
 		return ScheduleMapper.INSTANCE.toDto(scheduleRepo.save(schedule));

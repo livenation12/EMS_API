@@ -15,6 +15,8 @@ public class ScheduleRequestDto {
 
 	private String description;
 
+	private Long typeId;
+
 	@NotNull(message = "Start date is required")
 	private LocalDateTime startDate;
 
@@ -22,4 +24,5 @@ public class ScheduleRequestDto {
 	private LocalDateTime endDate;
 
 	private Set<Long> participantIds;
+
 }

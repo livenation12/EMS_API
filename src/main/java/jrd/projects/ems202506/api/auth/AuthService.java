@@ -1,6 +1,5 @@
 package jrd.projects.ems202506.api.auth;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,18 +12,19 @@ import jrd.projects.ems202506.api.auth.dto.AuthDto;
 import jrd.projects.ems202506.api.auth.dto.LoginRequest;
 import jrd.projects.ems202506.api.auth.dto.RegisterRequest;
 import jrd.projects.ems202506.api.exception.ApiException;
+import jrd.projects.ems202506.api.user.User;
+import jrd.projects.ems202506.api.user.UserRepo;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Service
 public class AuthService {
 
-	@Autowired
-	private AuthenticationManager authManager;
+	private final AuthenticationManager authManager;
 
-	@Autowired
-	private UserRepo userRepo;
+	private final UserRepo userRepo;
 
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
+	private final BCryptPasswordEncoder passwordEncoder;
 
 	public AuthDto login(LoginRequest request) {
 		try {

@@ -5,7 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import jrd.projects.ems202506.api.auth.User;
+import jrd.projects.ems202506.api.user.User;
 
 @Repository
 public interface TaskLogRepo extends JpaRepository<TaskLog, Long> {

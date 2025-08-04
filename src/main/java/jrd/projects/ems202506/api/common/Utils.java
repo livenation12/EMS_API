@@ -3,8 +3,8 @@ package jrd.projects.ems202506.api.common;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import jrd.projects.ems202506.api.auth.User;
 import jrd.projects.ems202506.api.auth.UserPrincipal;
+import jrd.projects.ems202506.api.user.User;
 
 public class Utils {
 

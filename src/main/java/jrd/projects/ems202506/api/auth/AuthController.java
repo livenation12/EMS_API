@@ -28,6 +28,7 @@ public class AuthController {
 	@Autowired
 	private JwtService jwtService;
 
+
 	@PostMapping("/login")
 	public ApiResponse<AuthDto> login(@RequestBody @Valid LoginRequest request, HttpServletResponse response){
 		AuthDto authUser = authService.login(request);

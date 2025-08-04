@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class EmployeeStatusTypeRequestDto {
 
-	@NotBlank
+	@NotBlank(message = "Label is required")
 	private String label;
 
 	private String colorCode;

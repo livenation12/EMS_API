@@ -9,4 +9,6 @@ public class ScheduleTypeRequest {
 	@NotBlank(message = "Label is required")
 	private String label;
 
+	private String colorCode;
+
 }

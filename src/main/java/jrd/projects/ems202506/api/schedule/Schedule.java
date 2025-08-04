@@ -15,9 +15,9 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jrd.projects.ems202506.api.auth.User;
 import jrd.projects.ems202506.api.employee.Employee;
 import jrd.projects.ems202506.api.schedule_type.ScheduleType;
+import jrd.projects.ems202506.api.user.User;
 import lombok.Data;
 
 @Data

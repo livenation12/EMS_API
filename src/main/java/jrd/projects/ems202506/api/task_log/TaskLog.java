@@ -13,9 +13,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jrd.projects.ems202506.api.auth.User;
 import jrd.projects.ems202506.api.enums.ActionType;
 import jrd.projects.ems202506.api.task.Task;
+import jrd.projects.ems202506.api.user.User;
 import lombok.Data;
 
 @Data
